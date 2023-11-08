@@ -37,20 +37,6 @@ class WalletState extends State<Wallet> {
       });
       print(pvKey);
     }
-    //   String response = await getBalances(address.hex, 'sepolia');
-    //   dynamic data = json.decode(response);
-    //   String newBalance = data['balance'] ?? '0';
-
-    //   // Transform balance from wei to ether
-    //   EtherAmount latestBalance =
-    //       EtherAmount.fromBigInt(EtherUnit.wei, BigInt.parse(newBalance));
-    //   String latestBalanceInEther =
-    //       latestBalance.getValueInUnit(EtherUnit.ether).toString();
-
-    //   setState(() {
-    //     balance = latestBalanceInEther;
-    //   });
-    // }
   }
 
   @override

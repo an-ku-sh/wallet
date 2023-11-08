@@ -26,16 +26,7 @@ class _OnboardingState extends State<Onboarding> {
         );
       },
     );
-    // final privateKey =
-    //     await walletProvider.getPrivateKey(mnemonic);
-    // final publicKey =
-    //     await walletProvider.getPublicKey(privateKey);
-    // setState(() {
-    //   walletProvider.setPrivateKey();
-    // });
     print(mnemonic);
-    // print(privateKey);
-    // print(publicKey);
   }
 
   void navigateToWalletPage() {
