@@ -21,12 +21,14 @@ class WalletProvider extends ChangeNotifier implements WalletAddressService {
   Future<void> loadPrivateKey() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     privateKey = prefs.getString('privateKey');
+    print(privateKey);
   }
 
   //Function to set private key
-  Future<void> setPrivateKey() async {
+  Future<void> setPrivateKey(String privateKey) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('privateKey', privateKey!);
+    await prefs.setString('privateKey', privateKey);
+    this.privateKey = privateKey;
     notifyListeners();
   }
 
@@ -42,6 +44,7 @@ class WalletProvider extends ChangeNotifier implements WalletAddressService {
     final seed = bip39.mnemonicToSeed(mnemonic);
     final master = await ED25519_HD_KEY.getMasterKeyFromSeed(seed);
     final privateKey = HEX.encode(master.key);
+    await setPrivateKey(privateKey);
     return privateKey;
   }
 
