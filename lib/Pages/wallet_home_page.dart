@@ -18,6 +18,7 @@ class WalletState extends State<Wallet> {
   String? balance = '';
   String pvKey = '';
   Credentials? creds;
+  TextEditingController controller = TextEditingController();
 
   //Web3
   Client? httpClient;
@@ -87,6 +88,13 @@ class WalletState extends State<Wallet> {
                   backgroundColor: Colors.blueAccent,
                 ),
                 child: const Text("Send Eth"),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blueAccent,
+                ),
+                child: const Text("Request Eth"),
               ),
             ],
           ),
