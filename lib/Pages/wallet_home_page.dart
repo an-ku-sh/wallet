@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallet/Pages/onboarding.dart';
+import 'package:wallet/Services/functions.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart';
 import '../Utils/constants.dart';
@@ -36,11 +37,11 @@ class WalletState extends State<Wallet> {
     print("load wallet called");
     // SharedPreferences preferences = await SharedPreferences.getInstance();
     // String? privateKey = preferences.getString('privateKey');
-
     //fetching balance using default web3dart methods
-    // final credentials = EthPrivateKey.fromHex(privateKey!);
     final credentials = EthPrivateKey.fromHex(pv_key_ankush_dev);
+    // final credentials = EthPrivateKey.fromHex(privateKey!);
     final address = credentials.address;
+
     // pvKey = credentials.privateKey.toString();
     print(address.hexEip55);
     print(await ethClient?.getBalance(address));
@@ -53,20 +54,6 @@ class WalletState extends State<Wallet> {
       // pvKey = privateKey!;
     });
   }
-
-  // Future<void> sendEth() async {
-  //   await ethClient?.sendTransaction(
-  //     creds!,
-  //     Transaction(
-  //       to: EthereumAddress.fromHex('0xC91...3706'),
-  //       gasPrice: EtherAmount.inWei(BigInt.one),
-  //       maxGas: 100000,
-  //       value: EtherAmount.fromUnitAndValue(EtherUnit.wei, 1),
-  //     ),
-  //   );
-  // }
-
-  Future<void> requestEth() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +79,15 @@ class WalletState extends State<Wallet> {
               ),
               Text("Balance in Wei $balance"),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  sendEther(
+                      dev_publicKey,
+                      EtherAmount.fromUnitAndValue(
+                              EtherUnit.wei, 1000000000000000)
+                          .toString(),
+                      ethClient!,
+                      pv_key_ankush_dev);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent,
                 ),
