@@ -33,16 +33,6 @@ Future<String> getBalance(Web3Client ethClient, String pvkey) async {
   return response;
 }
 
-// Future<String> ask(String fname, List<dynamic> args, Web3Client ethClient,
-//     String pvkey) async {
-//   final contract = await loadContract();
-//   final ethFunction = contract.function(fname);
-//   final result =
-//       ethClient.call(contract: contract, function: ethFunction, params: args);
-//   print(result.toString());
-//   return result.toString();
-// }
-
 Future<String> sendEther(
   String address,
   String amount,
@@ -61,3 +51,4 @@ Future<String> sendEther(
   print("ETH sent");
   return response;
 }
+

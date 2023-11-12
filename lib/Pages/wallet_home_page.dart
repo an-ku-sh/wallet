@@ -17,6 +17,7 @@ class WalletState extends State<Wallet> {
   String walletAddress = '';
   String? balance = '';
   String pvKey = '';
+  Credentials? creds;
 
   //Web3
   Client? httpClient;
@@ -32,8 +33,8 @@ class WalletState extends State<Wallet> {
 
   Future<void> loadWalletData() async {
     print("load wallet called");
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? privateKey = prefs.getString('privateKey');
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? privateKey = preferences.getString('privateKey');
 
     //fetching balance using default web3dart methods
     final credentials = EthPrivateKey.fromHex(privateKey!);
@@ -45,19 +46,38 @@ class WalletState extends State<Wallet> {
     setState(() {
       walletAddress = address.hexEip55;
       balance = bal?.getInWei.toString();
+      creds = credentials;
+      pvKey = privateKey;
     });
   }
+
+  // Future<void> sendEth() async {
+  //   await ethClient?.sendTransaction(
+  //     creds!,
+  //     Transaction(
+  //       to: EthereumAddress.fromHex('0xC91...3706'),
+  //       gasPrice: EtherAmount.inWei(BigInt.one),
+  //       maxGas: 100000,
+  //       value: EtherAmount.fromUnitAndValue(EtherUnit.wei, 1),
+  //     ),
+  //   );
+  // }
+
+  Future<void> requestEth() async {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            ElevatedButton(onPressed: () {}, child: const Text("SendEth")),
-            Text(walletAddress),
-            Text("Balance in Wei $balance")
-          ],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(walletAddress),
+              Text("Balance in Wei $balance"),
+              ElevatedButton(onPressed: () {}, child: const Text("Send Eth")),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(onPressed: () async {

@@ -26,7 +26,9 @@ class MaterialAppBase extends StatelessWidget {
   Widget build(BuildContext context) {
     final walletProvider = Provider.of<WalletProvider>(context);
     return MaterialApp(
-      home: walletProvider.privateKey == null ? Onboarding() : Wallet(),
+      home: walletProvider.privateKey == null
+          ? const Onboarding()
+          : const Wallet(),
     );
   }
 }
