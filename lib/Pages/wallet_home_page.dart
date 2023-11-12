@@ -32,7 +32,7 @@ class WalletState extends State<Wallet> {
   }
 
   Future<void> loadWalletData() async {
-    print("load wallet called");
+    // print("load wallet called");
     //loading private key from sharedPrefs
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? privateKey = prefs.getString('privateKey');
@@ -40,9 +40,9 @@ class WalletState extends State<Wallet> {
     //fetching balance
     Credentials credentials = EthPrivateKey.fromHex(privateKey!);
     var address = credentials.address;
-    print(address.hex);
+    // print(address.hex);
     EtherAmount balance = await ethClient!.getBalance(address);
-    print(balance.getValueInUnit(EtherUnit.ether));
+    // print(balance.getValueInUnit(EtherUnit.ether));
 
     //updating wallet data
     setState(() {

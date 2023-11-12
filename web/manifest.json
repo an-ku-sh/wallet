@@ -1,7 +1,7 @@
 {
-  "name": "QR Code Extension",
-  "description": "QR Code Extension",
-  "version": "1.0.0",
+  "name": "Web3Wallet APP",
+  "description": "Web3Wallet APP",
+  "version": "1.2.0",
   "content_security_policy": {
       "extension_pages": "script-src 'self' ; object-src 'self'"
   },

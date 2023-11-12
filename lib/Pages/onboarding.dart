@@ -20,22 +20,22 @@ class _OnboardingState extends State<Onboarding> {
         setState(
           () {
             keyExists = true;
-            print(keyExists);
+            // print(keyExists);
             navigateToWalletPage();
           },
         );
       },
     );
-    print(mnemonic);
+    // print(mnemonic);
   }
 
   void navigateToWalletPage() {
-    print("push called");
+    // print("push called");
     keyExists
         ? Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => Wallet(),
+              builder: (context) => const Wallet(),
             ),
           )
         : null;
@@ -51,7 +51,7 @@ class _OnboardingState extends State<Onboarding> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextField(
+                const TextField(
                   decoration: InputDecoration(
                     hintText: "Enter Phone Number To Continue",
                     border: OutlineInputBorder(),

@@ -52,7 +52,7 @@ class WalletProvider extends ChangeNotifier implements WalletAddressService {
   @override
   Future<EthereumAddress> getPublicKey(String privateKey) async {
     final private = EthPrivateKey.fromHex(privateKey);
-    final address = await private.address;
+    final address = private.address;
     return address;
   }
 }
