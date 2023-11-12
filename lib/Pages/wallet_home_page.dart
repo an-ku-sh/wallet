@@ -34,23 +34,18 @@ class WalletState extends State<Wallet> {
     print("load wallet called");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? privateKey = prefs.getString('privateKey');
+
     //fetching balance using default web3dart methods
     final credentials = EthPrivateKey.fromHex(privateKey!);
     final address = credentials.address;
     print(address.hexEip55);
     print(await ethClient?.getBalance(address));
+    EtherAmount? bal = await ethClient?.getBalance(address);
 
-    await ethClient?.sendTransaction(
-      credentials,
-      Transaction(
-        to: EthereumAddress.fromHex(
-          '0x4B92A586C2010a539EE5f9261dD1Ba4D1c1f43AD',
-        ),
-        gasPrice: EtherAmount.inWei(BigInt.one),
-        maxGas: 100000,
-        value: EtherAmount.fromUnitAndValue(EtherUnit.wei, 10000000000000000),
-      ),
-    );
+    setState(() {
+      walletAddress = address.hexEip55;
+      balance = bal?.getInWei.toString();
+    });
   }
 
   @override
@@ -59,20 +54,15 @@ class WalletState extends State<Wallet> {
       body: Center(
         child: Column(
           children: [
-            ElevatedButton(
-                onPressed: () {
-                  // sendEther('0x4B92A586C2010a539EE5f9261dD1Ba4D1c1f43AD',
-                  //     '0.02', ethClient!, pvKey);
-                },
-                child: Text("SendEth")),
+            ElevatedButton(onPressed: () {}, child: const Text("SendEth")),
             Text(walletAddress),
-            Text(balance!)
+            Text("Balance in Wei $balance")
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(onPressed: () async {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.remove('privateKey');
+        SharedPreferences preferences = await SharedPreferences.getInstance();
+        await preferences.remove('privateKey');
         // ignore: use_build_context_synchronously
         Navigator.pushAndRemoveUntil(
           context,
