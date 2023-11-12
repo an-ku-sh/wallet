@@ -68,6 +68,12 @@ class WalletState extends State<Wallet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blueAccent,
+        title: const Text(
+          "Frictionless zkWallet",
+        ),
+      ),
       body: SafeArea(
         child: Center(
           child: Column(
@@ -75,23 +81,33 @@ class WalletState extends State<Wallet> {
             children: [
               Text(walletAddress),
               Text("Balance in Wei $balance"),
-              ElevatedButton(onPressed: () {}, child: const Text("Send Eth")),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blueAccent,
+                ),
+                child: const Text("Send Eth"),
+              ),
             ],
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () async {
-        SharedPreferences preferences = await SharedPreferences.getInstance();
-        await preferences.remove('privateKey');
-        // ignore: use_build_context_synchronously
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Onboarding(),
-          ),
-          (route) => false,
-        );
-      }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          SharedPreferences preferences = await SharedPreferences.getInstance();
+          await preferences.remove('privateKey');
+          // ignore: use_build_context_synchronously
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const Onboarding(),
+            ),
+            (route) => false,
+          );
+        },
+        backgroundColor: Colors.blueAccent,
+        child: const Icon(Icons.logout),
+      ),
     );
   }
 }

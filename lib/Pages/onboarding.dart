@@ -60,12 +60,18 @@ class _OnboardingState extends State<Onboarding> {
                 ElevatedButton(
                   onPressed: () {},
                   child: const Text("Continue"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                  ),
                 ),
                 ElevatedButton(
                   onPressed: () async {
                     keyGen();
                   },
                   child: const Text("Generate Wallet"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                  ),
                 ),
               ],
             ),
