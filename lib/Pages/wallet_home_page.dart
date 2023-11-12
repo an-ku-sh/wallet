@@ -39,18 +39,20 @@ class WalletState extends State<Wallet> {
     final address = credentials.address;
     print(address.hexEip55);
     print(await ethClient?.getBalance(address));
-
-    await ethClient?.sendTransaction(
-      credentials,
-      Transaction(
-        to: EthereumAddress.fromHex(
-          '0x4B92A586C2010a539EE5f9261dD1Ba4D1c1f43AD',
-        ),
-        gasPrice: EtherAmount.inWei(BigInt.one),
-        maxGas: 100000,
-        value: EtherAmount.fromUnitAndValue(EtherUnit.wei, 10000000000000000),
-      ),
-    );
+    walletAddress = address.hexEip55;
+    // balance = await ethClient?.getBalance(address).toString();
+    setState(() {});
+    // await ethClient?.sendTransaction(
+    //   credentials,
+    //   Transaction(
+    //     to: EthereumAddress.fromHex(
+    //       '0x4B92A586C2010a539EE5f9261dD1Ba4D1c1f43AD',
+    //     ),
+    //     gasPrice: EtherAmount.inWei(BigInt.one),
+    //     maxGas: 100000,
+    //     value: EtherAmount.fromUnitAndValue(EtherUnit.wei, 10000000000000000),
+    //   ),
+    // );
   }
 
   @override
