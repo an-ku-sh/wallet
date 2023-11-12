@@ -34,12 +34,14 @@ class WalletState extends State<Wallet> {
 
   Future<void> loadWalletData() async {
     print("load wallet called");
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    String? privateKey = preferences.getString('privateKey');
+    // SharedPreferences preferences = await SharedPreferences.getInstance();
+    // String? privateKey = preferences.getString('privateKey');
 
     //fetching balance using default web3dart methods
-    final credentials = EthPrivateKey.fromHex(privateKey!);
+    // final credentials = EthPrivateKey.fromHex(privateKey!);
+    final credentials = EthPrivateKey.fromHex(pv_key_ankush_dev);
     final address = credentials.address;
+    // pvKey = credentials.privateKey.toString();
     print(address.hexEip55);
     print(await ethClient?.getBalance(address));
     EtherAmount? bal = await ethClient?.getBalance(address);
@@ -48,7 +50,7 @@ class WalletState extends State<Wallet> {
       walletAddress = address.hexEip55;
       balance = bal?.getInWei.toString();
       creds = credentials;
-      pvKey = privateKey;
+      // pvKey = privateKey!;
     });
   }
 
@@ -80,7 +82,14 @@ class WalletState extends State<Wallet> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(walletAddress),
+              Text('public key: $walletAddress'),
+              const SizedBox(
+                height: 20,
+              ),
+              Text('private Key: $pv_key_ankush_dev'),
+              const SizedBox(
+                height: 20,
+              ),
               Text("Balance in Wei $balance"),
               ElevatedButton(
                 onPressed: () {},

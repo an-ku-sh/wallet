@@ -5,8 +5,10 @@ import 'package:web3dart/web3dart.dart';
 Future<DeployedContract> loadContract() async {
   String abi = await rootBundle.loadString('lib/assets/abi.json');
   String contractAddress = contract_address;
-  final contract = DeployedContract(ContractAbi.fromJson(abi, 'Wallet'),
-      EthereumAddress.fromHex(contractAddress));
+  final contract = DeployedContract(
+    ContractAbi.fromJson(abi, 'Wallet'),
+    EthereumAddress.fromHex(contractAddress),
+  );
   return contract;
 }
 
@@ -51,4 +53,3 @@ Future<String> sendEther(
   print("ETH sent");
   return response;
 }
-
